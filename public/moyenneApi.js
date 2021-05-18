@@ -15,7 +15,7 @@ form.addEventListener('submit', async(event) => {
     loader.classList.add("loader");
     let id = form.elements['id'].value;
     let password = form.elements['password'].value
-    const result = await fetch("http://localhost:4000/getVal", {
+    const result = await fetch("https://moyennembn.herokuapp.com/getVal", {
         method: 'POST',
         body: JSON.stringify({
             id: id,
