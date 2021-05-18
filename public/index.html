@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
+    <script src="moyenneApi.js" defer></script>
+    <title>Moyenne MBN</title>
+</head>
+
+<body>
+    <div class="top">
+        <p class="headTitle">Récupère ta moyenne ici !</p>
+    </div>
+    <div class="app">
+        <div class="part1">
+            <form id="login" class="login">
+                <input class="username" name="id" type="text" placeholder="identifiant MBN" required>
+                <input class="password" name="password" type="password" placeholder="mot de passe" required>
+                <input class="submit" type="submit" value="Get Moyenne">
+            </form>
+        </div>
+        <div class="part2">
+            <div class="content2">
+                <img src="study.png" alt="ilustration of woman who study" class="image">
+                <div class="box-moyenne">
+                    <p id="moyenneVal"></p>
+                    <div id="loader" class="none"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content3">
+        <div class="share" id="share">
+            <p id="textshared">Share the Website</p>
+            <input type="text" value="http://localhost:4000/" id="myInput">
+        </div>
+    </div>
+</body>
+
+</html>
