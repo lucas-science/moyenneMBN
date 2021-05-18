@@ -37,8 +37,7 @@ const sleep = (milliseconds) => {
 }
 
 const getMoyenne = async(password, identifiant) => {
-    console.log("la")
-    const waitTime = 750
+    const waitTime = 1000
     const browser = await puppeteer.launch({ 
         args: ['--no-sandbox']
     });
@@ -47,7 +46,6 @@ const getMoyenne = async(password, identifiant) => {
     await page.click('body > main > div > div > div > div > div > form > div:nth-child(1) > div > label')
     await page.click('#button-submit')
     await page.waitForNavigation()
-                console.log("la2")
         // connexion
     await page.type('#username', identifiant)
     await page.type('#password', password)
@@ -55,7 +53,6 @@ const getMoyenne = async(password, identifiant) => {
     await page.waitForNavigation()
         // command inside MBN
     await sleep(waitTime)
-            console.log("la3")
     try {
         await page.click('body > div.header > div.dropdown.dropdown--inverted.header__portals.dropdown--right.js-dropdown > button')
 
@@ -75,7 +72,7 @@ const getMoyenne = async(password, identifiant) => {
         return "Votre compte MBN n'a pas accès à l'ongelt 'évaluation'"
     }
     await sleep(waitTime)
-    // récupere les notes
+        // récupere les notes
 
     let exit = false
     let i = 0
@@ -85,7 +82,7 @@ const getMoyenne = async(password, identifiant) => {
     while (exit === false) {
         console.log()
         try {
-            await page.waitForSelector(`#yui-rec${i} > td.yui-dt0-col-moyenneEleve.yui-dt-col-moyenneEleve.yui-dt-sortable > div`, { visible: true, timeout: 500 })
+            await page.waitForSelector(`#yui-rec${i} > td.yui-dt0-col-moyenneEleve.yui-dt-col-moyenneEleve.yui-dt-sortable > div`, { visible: true, timeout: 750 })
             let element = await page.$(`#yui-rec${i} > td.yui-dt0-col-moyenneEleve.yui-dt-col-moyenneEleve.yui-dt-sortable > div`)
             let value = await page.evaluate(el => el.textContent, element)
             console.log(value)
