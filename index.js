@@ -50,12 +50,11 @@ const getMoyenne = async(password, identifiant) => {
     await page.type('#username', identifiant)
     await page.type('#password', password)
     await page.click('#bouton_valider')
-    await page.waitForNavigation()
         // command inside MBN
     await sleep(waitTime)
+
     try {
         await page.click('body > div.header > div.dropdown.dropdown--inverted.header__portals.dropdown--right.js-dropdown > button')
-
     } catch {
         await browser.close()
         return "Vous devez renseignez un mot de passe ou un identifiant correcte"
@@ -82,7 +81,7 @@ const getMoyenne = async(password, identifiant) => {
     while (exit === false) {
         console.log()
         try {
-            await page.waitForSelector(`#yui-rec${i} > td.yui-dt0-col-moyenneEleve.yui-dt-col-moyenneEleve.yui-dt-sortable > div`, { visible: true, timeout: 750 })
+            await page.waitForSelector(`#yui-rec${i} > td.yui-dt0-col-moyenneEleve.yui-dt-col-moyenneEleve.yui-dt-sortable > div`, { visible: true, timeout: 500 })
             let element = await page.$(`#yui-rec${i} > td.yui-dt0-col-moyenneEleve.yui-dt-col-moyenneEleve.yui-dt-sortable > div`)
             let value = await page.evaluate(el => el.textContent, element)
             console.log(value)
