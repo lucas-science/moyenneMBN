@@ -38,7 +38,7 @@ const sleep = (milliseconds) => {
 
 const getMoyenne = async(password, identifiant) => {
     const waitTime = 750
-    const browser puppeteer.launch({ 
+    const browser = puppeteer.launch({ 
         headless: false,
         args: ['--no-sandbox'] 
     });
