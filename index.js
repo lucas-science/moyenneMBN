@@ -40,7 +40,7 @@ const getMoyenne = async(password, identifiant) => {
     try{
             console.log("la")
     const waitTime = 750
-    const browser = puppeteer.launch({ 
+    const browser = await puppeteer.launch({ 
         args: ['--no-sandbox']
     });
     const page = await browser.newPage();
