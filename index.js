@@ -38,7 +38,10 @@ const sleep = (milliseconds) => {
 
 const getMoyenne = async(password, identifiant) => {
     const waitTime = 750
-    const browser = await puppeteer.launch({ headless: true });
+    const browser = await puppeteer.launch(  'args' : [
+    '--no-sandbox',
+    '--disable-setuid-sandbox'
+  ]);
     const page = await browser.newPage();
     await page.goto('https://cas.monbureaunumerique.fr/login?service=https%3A%2F%2Fwww.monbureaunumerique.fr%2Fsg.do%3FPROC%3DIDENTIFICATION_FRONT');
     await page.click('body > main > div > div > div > div > div > form > div:nth-child(1) > div > label')
