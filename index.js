@@ -55,6 +55,7 @@ const getMoyenne = async(password, identifiant) => {
         await page.click('body > div.header > div.dropdown.dropdown--inverted.header__portals.dropdown--right.js-dropdown > button')
 
     } catch {
+        await browser.close()
         return "Vous devez renseignez un mot de passe ou un identifiant correcte"
     }
     await sleep(waitTime)
@@ -65,6 +66,7 @@ const getMoyenne = async(password, identifiant) => {
     try {
         await page.click('#js-menu > ul.services-list.services-list--shortcut > li:nth-child(6) > a')
     } catch {
+        await browser.close()
         return "Votre compte MBN n'a pas accès à l'ongelt 'évaluation'"
     }
 
@@ -86,6 +88,7 @@ const getMoyenne = async(password, identifiant) => {
             i++
         } catch {
             if (i == 0) {
+                await browser.close()
                 return "Vous ne possèdez pas de note"
             }
             exit = true
@@ -111,6 +114,7 @@ const getMoyenne = async(password, identifiant) => {
         arrondi = moyenne * 100;
         arrondi = Math.round(arrondi);
         arrondi = arrondi / 100;
+        await browser.close()
         return `T'as moyenne est de : ${arrondi}`
     }
 
