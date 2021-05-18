@@ -81,7 +81,7 @@ const getMoyenne = async(password, identifiant) => {
     while (exit === false) {
         console.log()
         try {
-            await page.waitForSelector(`#yui-rec${i} > td.yui-dt0-col-moyenneEleve.yui-dt-col-moyenneEleve.yui-dt-sortable > div`, { visible: true, timeout: 500 })
+            await page.waitForSelector(`#yui-rec${i} > td.yui-dt0-col-moyenneEleve.yui-dt-col-moyenneEleve.yui-dt-sortable > div`, { visible: true, timeout: 800 })
             let element = await page.$(`#yui-rec${i} > td.yui-dt0-col-moyenneEleve.yui-dt-col-moyenneEleve.yui-dt-sortable > div`)
             let value = await page.evaluate(el => el.textContent, element)
             console.log(value)
