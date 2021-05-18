@@ -74,7 +74,7 @@ const getMoyenne = async(password, identifiant) => {
         await browser.close()
         return "Votre compte MBN n'a pas accès à l'ongelt 'évaluation'"
     }
-
+    await sleep(waitTime)
     // récupere les notes
 
     let exit = false
