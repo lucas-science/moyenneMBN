@@ -122,7 +122,7 @@ const getMoyenne = async(password, identifiant) => {
         await browser.close()
         return `T'as moyenne est de : ${arrondi}`
     }
-    }catch{
-        console.log("erreur")
+    }catch(e){
+        console.log("erreur : ",e)
     }
 }
