@@ -37,11 +37,13 @@ const sleep = (milliseconds) => {
 }
 
 const getMoyenne = async(password, identifiant) => {
+    console.log("la")
     const waitTime = 750
     const browser = puppeteer.launch({ 
         args: ['--no-sandbox']
     });
     const page = await browser.newPage();
+        console.log("la2")
     await page.goto('https://cas.monbureaunumerique.fr/login?service=https%3A%2F%2Fwww.monbureaunumerique.fr%2Fsg.do%3FPROC%3DIDENTIFICATION_FRONT');
     await page.click('body > main > div > div > div > div > div > form > div:nth-child(1) > div > label')
     await page.click('#button-submit')
