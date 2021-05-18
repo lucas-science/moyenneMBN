@@ -44,11 +44,11 @@ const getMoyenne = async(password, identifiant) => {
         args: ['--no-sandbox']
     });
     const page = await browser.newPage();
-        console.log("la2")
     await page.goto('https://cas.monbureaunumerique.fr/login?service=https%3A%2F%2Fwww.monbureaunumerique.fr%2Fsg.do%3FPROC%3DIDENTIFICATION_FRONT');
     await page.click('body > main > div > div > div > div > div > form > div:nth-child(1) > div > label')
     await page.click('#button-submit')
     await page.waitForNavigation()
+                console.log("la2")
         // connexion
     await page.type('#username', identifiant)
     await page.type('#password', password)
@@ -56,6 +56,7 @@ const getMoyenne = async(password, identifiant) => {
     await page.waitForNavigation()
         // command inside MBN
     await sleep(waitTime)
+            console.log("la3")
     try {
         await page.click('body > div.header > div.dropdown.dropdown--inverted.header__portals.dropdown--right.js-dropdown > button')
 
