@@ -37,8 +37,7 @@ const sleep = (milliseconds) => {
 }
 
 const getMoyenne = async(password, identifiant) => {
-    try{
-            console.log("la")
+    console.log("la")
     const waitTime = 750
     const browser = await puppeteer.launch({ 
         args: ['--no-sandbox']
@@ -123,7 +122,5 @@ const getMoyenne = async(password, identifiant) => {
         await browser.close()
         return `T'as moyenne est de : ${arrondi}`
     }
-    }catch(e){
-        console.log("erreur : ",e)
-    }
+
 }
