@@ -42,7 +42,7 @@ const browser = await puppeteer.launch({
   args: [
     '--no-sandbox',
     '--disable-setuid-sandbox',
-  ],
+  ]
 });
     const page = await browser.newPage();
     await page.goto('https://cas.monbureaunumerique.fr/login?service=https%3A%2F%2Fwww.monbureaunumerique.fr%2Fsg.do%3FPROC%3DIDENTIFICATION_FRONT');
