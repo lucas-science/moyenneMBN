@@ -3,21 +3,7 @@ let form = document.getElementById("login")
 let loader = document.getElementById("loader")
 let share = document.getElementById("share")
 let textshared = document.getElementById('textshared')
-    /*
-    const getvalue = async() => {
-        try {
-            console.log("here")
-            let result = await fetch("http://localhost:4000/getVal");
-            let data = await result.json()
-            return data
-        } catch (err) {
-            return err
-        }
-    }
-    boutton.addEventListener('click', async() => {
-        let valeur = await getvalue()
-        moyenneVal.innerText = valeur.val
-    })*/
+
 const sleep = (milliseconds) => {
     return new Promise(resolve => setTimeout(resolve, milliseconds))
 }
