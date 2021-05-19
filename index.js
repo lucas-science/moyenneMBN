@@ -37,33 +37,47 @@ const sleep = (milliseconds) => {
 }
 
 const getMoyenne = async(password, identifiant) => {
-    const waitTime = 1000
-    const browser = await puppeteer.launch({ 
+        const waitTime = 1000
+    const browser = await puppeteer.launch({
+        headless: false,
         args: ['--no-sandbox']
     });
+    //try {
     const page = await browser.newPage();
+    await page.setViewport({ width: 1280, height: 800 })
+
     await page.goto('https://cas.monbureaunumerique.fr/login?service=https%3A%2F%2Fwww.monbureaunumerique.fr%2Fsg.do%3FPROC%3DIDENTIFICATION_FRONT');
     await page.click('body > main > div > div > div > div > div > form > div:nth-child(1) > div > label')
-    await page.click('#button-submit')
-    await page.waitForNavigation()
-        // connexion
-    await page.type('#username', identifiant)
-    await page.type('#password', password)
-    await page.click('#bouton_valider')
-        // command inside MBN
-    await sleep(waitTime)
 
+    await Promise.all([
+        await page.click('#button-submit'),
+        page.waitForNavigation()
+    ])
+
+    // connexion
+    await page.type('#username', identifiant)
+    await page.type('#password', password);
+    //await page.click('#bouton_valider')
+    // command inside MBN
+    page.waitForNavigation()
+    await page.click('#bouton_valider')
+
+    console.log("la")
     try {
+        await page.waitForSelector('body > div.header > div.dropdown.dropdown--inverted.header__portals.dropdown--right.js-dropdown > button', { visible: true, timeout: 750 })
         await page.click('body > div.header > div.dropdown.dropdown--inverted.header__portals.dropdown--right.js-dropdown > button')
     } catch {
         await browser.close()
         return "Vous devez renseignez un mot de passe ou un identifiant correcte"
     }
+    //await sleep(waitTime)
+    console.log("la1")
+    page.waitForSelector('body > div.header > div.dropdown.dropdown--inverted.header__portals.dropdown--right.js-dropdown.dropdown--is-opened > div > ul > li:nth-child(1) > a')
+        .then(async() => {
+            await page.click('body > div.header > div.dropdown.dropdown--inverted.header__portals.dropdown--right.js-dropdown.dropdown--is-opened > div > ul > li:nth-child(1) > a')
+        })
     await sleep(waitTime)
-    await page.click('body > div.header > div.dropdown.dropdown--inverted.header__portals.dropdown--right.js-dropdown.dropdown--is-opened > div > ul > li:nth-child(1) > a')
-    await sleep(waitTime)
-    await page.click('#js-burger')
-    await sleep(waitTime)
+    console.log("la2")
     try {
         await page.click('#js-menu > ul.services-list.services-list--shortcut > li:nth-child(6) > a')
     } catch {
@@ -71,6 +85,8 @@ const getMoyenne = async(password, identifiant) => {
         return "Votre compte MBN n'a pas accès à l'ongelt 'évaluation'"
     }
     await sleep(waitTime)
+
+    console.log("la3")
         // récupere les notes
 
     let exit = false
@@ -81,7 +97,7 @@ const getMoyenne = async(password, identifiant) => {
     while (exit === false) {
         console.log()
         try {
-            await page.waitForSelector(`#yui-rec${i} > td.yui-dt0-col-moyenneEleve.yui-dt-col-moyenneEleve.yui-dt-sortable > div`, { visible: true, timeout: 800 })
+            await page.waitForSelector(`#yui-rec${i} > td.yui-dt0-col-moyenneEleve.yui-dt-col-moyenneEleve.yui-dt-sortable > div`, { visible: true, timeout: 500 })
             let element = await page.$(`#yui-rec${i} > td.yui-dt0-col-moyenneEleve.yui-dt-col-moyenneEleve.yui-dt-sortable > div`)
             let value = await page.evaluate(el => el.textContent, element)
             console.log(value)
@@ -118,5 +134,8 @@ const getMoyenne = async(password, identifiant) => {
         await browser.close()
         return `T'as moyenne est de : ${arrondi}`
     }
-
+    /* } catch {
+         await browser.close()
+         return "identifiant ou mot de passe incorrecte"
+     }*/
 }
